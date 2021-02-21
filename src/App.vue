@@ -5,56 +5,47 @@
       color="primary"
       dark
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+      <v-toolbar-title>Gestion des dépenses</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        href="https://github.com/CedricWagner/POC---CA-API-consumer"
         target="_blank"
         text
       >
-        <span class="mr-2">Latest Release</span>
+        <span class="mr-2">Voir sur github</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <LoginForm v-if="!authenticated" @authenticated="setAuthenticated"></LoginForm>
+      <OperationList v-if="authenticated"></OperationList>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import LoginForm from './components/LoginForm';
+import OperationList from './components/OperationList';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    LoginForm,
+    OperationList,
   },
 
   data: () => ({
-    //
+    authenticated: false,
   }),
+  
+  methods: {
+    setAuthenticated(status) {
+        this.authenticated = status;
+    }
+  }
 };
 </script>
